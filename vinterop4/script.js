@@ -41,6 +41,7 @@ let instrumenter = [
 let btnRandom;
 let teller = 0
 let randomNumber;
+let highscore = localStorage.getItem('highscore')
 
 function createHTML () {
     for(i = 0; i < instrumenter.length; i ++) {
@@ -54,6 +55,7 @@ function createHTML () {
         
     }
 }
+
 
 
 
@@ -77,13 +79,23 @@ function startGame() {
 btnStart.onclick = startGame;
 
 document.getElementsByClassName('divContainer')
+
 function chechAnswer(clicked_id) {
     if(clicked_id === `nr${randomNumber}`) {
         riktig.play();
         instrumenter.splice(randomNumber, 1);
         container.innerHTML = '';
         if(instrumenter.length === 0) {
-            alert(`du bruke ${teller} forsøk`)
+            if(highscore !== null && teller < highscore) {
+                alert(`gratulerer! du slo rekorden med ${highscore - teller} gjetninger. Totalt: ${teller}`);
+                localStorage.setItem('highscore', teller)
+            } else if ( highscore !== null && teller > highscore) {
+                alert(`Dessverre! Du var ${teller - highscore} gjetninger unna. Totalt: ${teller}`)  
+                
+            } else {
+                alert(`du er best og brukte bare ${teller} forsøk`)
+                localStorage.setItem('highscore', teller)
+            }
         } else {
             createHTML();
             makeNumber();
@@ -95,6 +107,8 @@ function chechAnswer(clicked_id) {
     }
     console.log(clicked_id)
 }
+
+
 
 
 btnRepeat.onclick = repeatSound;
