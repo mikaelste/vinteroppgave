@@ -1,0 +1,13 @@
+img {
+    object-fit: contain;
+    width: 120px;
+}
+#container {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+h2 {
+    display: flex;
+    justify-content: center;
+}
