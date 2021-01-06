@@ -1,4 +1,4 @@
-const btnRandom = document.getElementById('btnRandom')
+const btnStart = document.getElementById('btnRandom')
 const btnRepeat = document.getElementById('btnRepeat')
 const container = document.getElementById('container')
 const antGjett = document.getElementById('antGjett')
@@ -8,40 +8,39 @@ const feil = document.getElementById('lydFeil')
 let instrumenter = [
     {
         navn: 'fagott',
-        bilde: '/media/fagott.jpg',
-        lyd: '/media/fagott.mp3',
+        bilde: 'media/fagott.jpg',
+        lyd: 'media/fagott.mp3',
         verdi: ''
     },
     {
         navn: 'floyte',
-        bilde: '/media/floyte.gif',
-        lyd: '/media/floyte.mp3',
+        bilde: 'media/floyte.gif',
+        lyd: 'media/floyte.mp3',
         verdi: ''
     },
     {
         navn: 'klarinett',
-        bilde: '/media/klarinett.jpg',
-        lyd: '/media/klarinett.mp3',
+        bilde: 'media/klarinett.jpg',
+        lyd: 'media/klarinett.mp3',
         verdi: ''
     },
     {
         navn: 'obo',
-        bilde: '/media/obo.jpg',
-        lyd: '/media/obo.mp3',
+        bilde: 'media/obo.jpg',
+        lyd: 'media/obo.mp3',
         verdi: ''
     },
     {
         navn: 'valthorn',
-        bilde: '/media/valthorn.jpg',
-        lyd: '/media/valthorn.mp3',
+        bilde: 'media/valthorn.jpg',
+        lyd: 'media/valthorn.mp3',
         verdi: ''
     }
 ]
 
+let btnRandom;
 let teller = 0
 let randomNumber;
-
-
 
 function createHTML () {
     for(i = 0; i < instrumenter.length; i ++) {
@@ -55,7 +54,8 @@ function createHTML () {
         
     }
 }
-createHTML();
+
+
 
 function makeNumber () {
     randomNumber = Math.floor(Math.random() * instrumenter.length);
@@ -67,6 +67,14 @@ function repeatSound() {
     document.getElementById(randomNumber).duration = 5;
     document.getElementById(randomNumber).play();
 }
+function startGame() {
+    createHTML();
+    makeNumber();
+    btnStart.innerHTML = `Pass, ny lyd!`
+    btnStart = btnRandom
+}
+
+btnStart.onclick = startGame;
 
 document.getElementsByClassName('divContainer')
 function chechAnswer(clicked_id) {
