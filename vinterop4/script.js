@@ -88,7 +88,10 @@ function chechHighScore () {
     } else if ( Number(highscore) !== 0 && teller > Number(highscore)) {
         alert(`Dessverre! Du var ${teller - Number(highscore)} gjetninger unna rekorden (${highscore}). Totalt: ${teller} gjetninger`)  
         location.reload();
-    } else {
+    } else if (Number(highscore) === teller) {
+        alert(`Oioi! Du er like god som higscore med ${highscore} gjetninger. Prøv igjen!`)
+    } 
+    else {
         alert(`Du er best i veden og brukte bare ${teller} forsøk`)
         localStorage.setItem('highscore', teller)
         location.reload();
