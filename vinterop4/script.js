@@ -80,22 +80,28 @@ btnStart.onclick = startGame;
 
 document.getElementsByClassName('divContainer')
 
+function chechHighScore () {
+    if(Number(highscore) === 0) {
+        localStorage.setItem('highscore', teller)
+        alert(`Du er førstemann til og spille og satte rekorden til ${teller} gjetninger`);
+        location.reload();
+    } else if ( Number(highscore) !== 0 && teller > Number(highscore)) {
+        alert(`Dessverre! Du var ${teller - Number(highscore)} gjetninger unna rekorden (${highscore}). Totalt: ${teller} gjetninger`)  
+        location.reload();
+    } else {
+        alert(`Du er best i veden og brukte bare ${teller} forsøk`)
+        localStorage.setItem('highscore', teller)
+        location.reload();
+    }
+}
+
 function chechAnswer(clicked_id) {
     if(clicked_id === `nr${randomNumber}`) {
         riktig.play();
         instrumenter.splice(randomNumber, 1);
         container.innerHTML = '';
         if(instrumenter.length === 0) {
-            if(highscore !== null && teller < highscore) {
-                alert(`gratulerer! du slo rekorden med ${highscore - teller} gjetninger. Totalt: ${teller}`);
-                localStorage.setItem('highscore', teller)
-            } else if ( highscore !== null && teller > highscore) {
-                alert(`Dessverre! Du var ${teller - highscore} gjetninger unna. Totalt: ${teller}`)  
-                
-            } else {
-                alert(`du er best og brukte bare ${teller} forsøk`)
-                localStorage.setItem('highscore', teller)
-            }
+            chechHighScore();
         } else {
             createHTML();
             makeNumber();
@@ -107,9 +113,6 @@ function chechAnswer(clicked_id) {
     }
     console.log(clicked_id)
 }
-
-
-
 
 btnRepeat.onclick = repeatSound;
 btnRandom.onclick = makeNumber;
